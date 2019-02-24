@@ -1,10 +1,10 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="JokeUI.aspx.cs" Inherits="JokeNorris.JokeUI" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="JokeUI.aspx.cs" Inherits="JokeNorris.JokeUI" Async="true" %>
 
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>foo</title>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -18,7 +18,7 @@
             <br />
             <br />
             <br />
-            <asp:Button ID="btnNeverEndingJokes" runat="server" Text="Never-ending Jokes" />
+            <asp:Button ID="btnNeverEndingJokes" runat="server" Text="Never-ending Jokes" OnClick="btnNeverEndingJokes_Click" />
         </div>
     </form>
 </body>

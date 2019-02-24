@@ -1,25 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Threading.Tasks;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using JokeNorris.Api;
+
 
 namespace JokeNorris
 {
-    public partial class JokeUI : System.Web.UI.Page
+    public partial class JokeUI : Page
     {
-        protected void Page_Load(object sender, EventArgs e)
-        {
+        private readonly JokeFetcher _jokeFetcher = new JokeFetcher();
 
+        protected void btnRandomJoke_Click(object Sender, EventArgs Args)
+        {
+            this.RegisterAsyncTask(new PageAsyncTask(RandomJokeHandlerAsync));
         }
 
-        protected void btnRandomJoke_Click(object sender, EventArgs e)
+        private async Task RandomJokeHandlerAsync()
         {
-            var bob = HttpClientHandler.HttpClientHandlerAsync("https://api.icndb.com?callback=");
-            var fred = bob.Status;
-            var msg = $"alert(' {fred.ToString()} ');";
-            ScriptManager.RegisterStartupScript(this, GetType(), "alert", msg, true);
+            try
+            {
+                var joke = await this._jokeFetcher.GetRandomJokeAsync();
+
+                var displayJoke = $"alert(\"{joke.joke}\");";
+                ScriptManager.RegisterStartupScript(this, GetType(), "alert", displayJoke, true);
+            }
+            catch (Exception)
+            {
+                throw new NotImplementedException(); // todo: handle exceptions!
+            }
+        }
+
+        protected void btnNeverEndingJokes_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
