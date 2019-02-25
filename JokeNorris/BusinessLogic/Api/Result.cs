@@ -1,4 +1,4 @@
-﻿namespace JokeNorris.Api
+﻿namespace JokeNorris.BusinessLogic.Api
 {
     public class Result<TValue>
     {

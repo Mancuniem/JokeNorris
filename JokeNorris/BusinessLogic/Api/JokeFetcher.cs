@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading.Tasks;
 
-namespace JokeNorris.Api
+namespace JokeNorris.BusinessLogic.Api
 {
     public class JokeFetcher
     {
@@ -71,9 +71,9 @@ namespace JokeNorris.Api
         /// Retrieve a random joke from the API
         /// </summary>
         /// <returns></returns>
-        public async Task<Joke> GetCharacterJokeAsync(string firstName, string lastName)
+        public async Task<Joke> GetCharacterJokeAsync(string FirstName, string LastName)
         {
-            var response = await this._httpClient.GetAsync($"/jokes/random?firstName={firstName}&lastname={lastName}");
+            var response = await this._httpClient.GetAsync($"/jokes/random?firstName={FirstName}&lastName={LastName}");
 
             response.EnsureSuccessStatusCode();
 
