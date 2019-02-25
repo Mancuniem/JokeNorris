@@ -14,7 +14,7 @@
             <br />
             <br />
             <asp:TextBox ID="txtCharacterEntry" runat="server"></asp:TextBox>
-            <asp:Button ID="btnCharacterSearch" runat="server" Text="Search" />
+            <asp:Button ID="btnCharacterSearch" runat="server" Text="Search" OnClick="btnCharacterSearch_Click" />
             <br />
             <br />
             <br />

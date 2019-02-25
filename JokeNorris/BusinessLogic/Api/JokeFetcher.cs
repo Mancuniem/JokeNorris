@@ -66,5 +66,20 @@ namespace JokeNorris.Api
 
             return EnsureSuccessResult(result);
         }
+
+        /// <summary>
+        /// Retrieve a random joke from the API
+        /// </summary>
+        /// <returns></returns>
+        public async Task<Joke> GetCharacterJokeAsync(string firstName, string lastName)
+        {
+            var response = await this._httpClient.GetAsync($"/jokes/random?firstName={firstName}&lastname={lastName}");
+
+            response.EnsureSuccessStatusCode();
+
+            var result = await response.Content.ReadAsAsync<Result<Joke>>();
+
+            return EnsureSuccessResult(result);
+        }
     }
 }
