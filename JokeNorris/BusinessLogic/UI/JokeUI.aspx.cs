@@ -12,6 +12,7 @@ namespace JokeNorris
     {
         private readonly JokeFetcher _jokeFetcher = new JokeFetcher();
 
+        
         private void DisplayJoke(Joke Joke)
         {
             var displayJoke = $"alert(\"{Joke.joke}\");";
@@ -31,32 +32,6 @@ namespace JokeNorris
                 throw new NotImplementedException(); // todo: handle exceptions!
             }
         }
-
-        //private async Task CharacterSearchHandlerAsync()
-        //{
-        //    try
-        //    {
-        //        var joke = await this._jokeFetcher.GetCharacterJokeAsync();
-
-        //        DisplayJoke(joke);
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw new NotImplementedException(); // todo: handle exceptions!
-        //    }
-        //}
-
-        //private async Task NeverEndingJokesHandlerAsync()
-        //{
-        //    try
-        //    {
-        //        //todo
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw new NotImplementedException(); // todo: handle exceptions!
-        //    }
-        //}
 
         protected void btnRandomJoke_Click(object Sender, EventArgs Args)
         {
@@ -89,12 +64,12 @@ namespace JokeNorris
             // Split the text entered into strings using white space as delimiter
             var nameParts = Regex.Split(rawText, @"\s+");
 
-            // Enforce two string entities. i.e. Insist on values for first name and last name
-            // This is purely a design choice.  There are many other options for validating what is entered.
-            if (nameParts.Length < 2)
-            {
-                throw new NotImplementedException();
-            }
+            //// Enforce two string entities. i.e. Insist on values for first name and last name
+            //// This is purely a design choice.  There are many other options for validating what is entered.
+            //if (nameParts.Length < 2)
+            //{
+            //    throw new NotImplementedException();
+            //}
 
             // Also an arbitrary design choice for splitting first and last names.  
             // Here we are assuming the last string entered is the last name and all previous strings form the first name.
@@ -117,13 +92,6 @@ namespace JokeNorris
                 }
             }));
         }
-
-        protected void btnNeverEndingJokes_Click(object Sender, EventArgs e)
-        {
-            //this.RegisterAsyncTask(new PageAsyncTask(NeverEndingJokesHandlerAsync));
-            throw new NotImplementedException();
-        }
-
 
     }
 }

@@ -22,11 +22,6 @@ namespace JokeNorris.BusinessLogic
             {"\'", "&#x27;"}
         };
 
-        //public TextSanitizer(string InputText)
-        //{
-        //    Sanitize(InputText);
-        //}
-
         public static string Sanitize(string Text)
         {
             // Cycle through the special characters, testing each for their presence in the text with each iteration

@@ -13,13 +13,13 @@ namespace JokeNorris {
     public partial class JokeUI {
         
         /// <summary>
-        /// form1 control.
+        /// frmChuck control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlForm frmChuck;
         
         /// <summary>
         /// btnRandomJoke control.
@@ -29,6 +29,15 @@ namespace JokeNorris {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnRandomJoke;
+        
+        /// <summary>
+        /// lblEnterName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblEnterName;
         
         /// <summary>
         /// txtCharacterEntry control.
@@ -47,14 +56,5 @@ namespace JokeNorris {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCharacterSearch;
-        
-        /// <summary>
-        /// btnNeverEndingJokes control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnNeverEndingJokes;
     }
 }
