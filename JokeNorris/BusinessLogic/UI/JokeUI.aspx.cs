@@ -12,27 +12,26 @@ namespace JokeNorris
     {
         private readonly JokeFetcher _jokeFetcher = new JokeFetcher();
 
-        
         private void DisplayJoke(Joke Joke)
         {
             var displayJoke = $"alert(\"{Joke.joke}\");";
             ScriptManager.RegisterStartupScript(this, GetType(), "alert", displayJoke, true);
         }
 
-        private async Task RandomJokeHandlerAsync()
+        private void DisplayErrorMessage(string ErrorMessage)
         {
-            try
-            {
-                var joke = await this._jokeFetcher.GetRandomJokeAsync();
-
-                DisplayJoke(joke);
-            }
-            catch (Exception)
-            {
-                throw new NotImplementedException(); // todo: handle exceptions!
-            }
+            var message = $"alert(\"{ErrorMessage}\");";
+            ScriptManager.RegisterStartupScript(this, GetType(), "alert", message, true);
         }
 
+        /// <summary>
+        /// Fires on the click of the Random Joke button
+        /// Registers the asynchronous task as an event handler cannot be asynchronous
+        /// Attempts to call JokeFetcher, which attempts to consume the ICNDB web service.
+        /// Displays joke or error message, dependent on success.
+        /// </summary>
+        /// <param name="Sender"></param>
+        /// <param name="Args"></param>
         protected void btnRandomJoke_Click(object Sender, EventArgs Args)
         {
             this.RegisterAsyncTask(new PageAsyncTask(async () => {
@@ -42,17 +41,16 @@ namespace JokeNorris
 
                     DisplayJoke(joke);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw new NotImplementedException(); // todo: handle exceptions!
+                    DisplayErrorMessage(ex.Message);
                 }
             }));
         }
 
         /// <summary>
         /// On clicking the Search button, read in the text entered in the text box.
-        /// Format, split and sanitize it and send to the ICNDB to retrieve a random joke with the name customized to the text entered.
-        /// As this is a name field, there is minimal validation, because names can be so very varied.
+        /// Format, split the text (it will be escaped later) and send to the ICNDB to retrieve a random joke with the name customized to the text entered.
         /// </summary>
         /// <param name="Sender"></param>
         /// <param name="e"></param>
@@ -64,34 +62,24 @@ namespace JokeNorris
             // Split the text entered into strings using white space as delimiter
             var nameParts = Regex.Split(rawText, @"\s+");
 
-            //// Enforce two string entities. i.e. Insist on values for first name and last name
-            //// This is purely a design choice.  There are many other options for validating what is entered.
-            //if (nameParts.Length < 2)
-            //{
-            //    throw new NotImplementedException();
-            //}
-
             // Also an arbitrary design choice for splitting first and last names.  
-            // Here we are assuming the last string entered is the last name and all previous strings form the first name.
+            // Here we are assuming the last string entered is the last name and all/any previous strings form the first name.
             var lastName = nameParts[nameParts.Length - 1];
             var firstName = string.Join(" ", nameParts, 0, (nameParts.Length - 1));
-            var sanitizedFirstName = TextSanitizer.Sanitize(firstName);
-            var sanitizedLastName = TextSanitizer.Sanitize(lastName);
 
             this.RegisterAsyncTask(new PageAsyncTask(async () =>
             {
                 try
                 {
-                    var joke = await this._jokeFetcher.GetCharacterJokeAsync(sanitizedFirstName, sanitizedLastName);
+                    var joke = await this._jokeFetcher.GetCharacterJokeAsync(firstName, lastName);
 
                     DisplayJoke(joke);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw new NotImplementedException(); // todo: handle exceptions!
+                    DisplayErrorMessage(ex.Message);
                 }
             }));
         }
-
     }
 }

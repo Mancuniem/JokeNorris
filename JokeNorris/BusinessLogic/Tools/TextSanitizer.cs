@@ -32,7 +32,7 @@ namespace JokeNorris.BusinessLogic
                 Text = Text.Replace(pair.Key, pair.Value);
             }
 
-            return Text;
+            return HttpUtility.HtmlEncode(Text);
         }
     }
 }

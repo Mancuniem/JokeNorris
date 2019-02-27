@@ -46,7 +46,7 @@ namespace JokeNorris.BusinessLogic.Api
         {
             if (!Result.type.Equals("success", StringComparison.InvariantCulture))
             {
-                throw new Exception("Result did not indicate success");
+                throw new Exception($"Result did not indicate success. Type = {Result.type} Value = {Result.value}");
             }
 
             return Result.value;
@@ -55,7 +55,7 @@ namespace JokeNorris.BusinessLogic.Api
         /// <summary>
         /// Retrieve a random joke from the API
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The retrieved joke</returns>
         public async Task<Joke> GetRandomJokeAsync()
         {
             var response = await this._httpClient.GetAsync("/jokes/random");
@@ -68,12 +68,16 @@ namespace JokeNorris.BusinessLogic.Api
         }
 
         /// <summary>
-        /// Retrieve a random joke from the API
+        /// Retrieve a random joke from the API with a different character name
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The retrieved joke</returns>
         public async Task<Joke> GetCharacterJokeAsync(string FirstName, string LastName)
         {
-            var response = await this._httpClient.GetAsync($"/jokes/random?firstName={FirstName}&lastName={LastName}");
+            var escapedFirstName = Uri.EscapeDataString(FirstName);
+            var escapedLastName = Uri.EscapeDataString(LastName);
+
+            var uri = $"/jokes/random?firstName={escapedFirstName}&lastName={escapedLastName}";
+            var response = await this._httpClient.GetAsync(uri);
 
             response.EnsureSuccessStatusCode();
 
